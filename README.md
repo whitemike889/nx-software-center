@@ -1,6 +1,5 @@
 # NX Software Center [![Build Status](https://travis-ci.org/Nitrux/nx-software-center.svg?branch=development)](https://travis-ci.org/Nitrux/nx-software-center)
-
-_A portable Software Center for portable applications thanks to [AppImage](https://appimage.org/)._
+_Software Center for portable applications for [AppImages](https://appimage.org/)._
 
 You can now easily explore and get your favorite applications easily (in some cases directly from their original authors!). No matter which GNU/Linux distribution you are using.
 
@@ -11,13 +10,13 @@ Say goodbye to things like:
 
 **Just download and run!**
 
-## Feeds
+# Feeds
 The AppImages included are fetched from:
 * https://appimage.github.io/
 * https://www.appimagehub.com/
+* https://www.linux-apps.com/
 
 # Screenshots
-
  * Search View
  
 ![](https://user-images.githubusercontent.com/1138094/39208689-58d3ae84-47c9-11e8-83a9-28d89a6f2cbb.png)
@@ -32,16 +31,28 @@ The AppImages included are fetched from:
 
 ## Build
 ### Requirements
- * CMake 3.10.0 +
- * Qt 5.10+
- * KF5 Plasma 5.45.0 +
- * LibAppImage (latest)
- 
+ * cmake
+ * build-essential
+ * xxd
+ * libtool
+ * automake
+ * qt5-default
+ * binutils-multiarch-dev
+ * libboost-filesystem-dev
+ * libxml2-dev
+ * libssl-dev
+ * libboost-program-options-dev
+ * qt5declarative-dev
+ * libqt5xmlpattern5-dev
+ * autotools-dev
+ * libcairo2-dev
+ * libfuse-dev
+
 ### Instructions
  1. `git clone https://github.com/Nitrux/nx-software-center.git` 
  1. `mkdir build`
  1. `cd build`
- 1. `cmake ../nx-software-center -DCMAKE_BUILD_PREFIX=Release -DCMAKE_INSTALL_PREFIX=/usr`
+ 1. `cmake .. -DCMAKE_BUILD_PREFIX=Release -DCMAKE_INSTALL_PREFIX=/usr`
  1. `make`
 
 # Issues
