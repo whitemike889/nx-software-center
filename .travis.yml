@@ -70,7 +70,7 @@ deploy:
   overwrite: true
   on:
     repo: Nitrux/nx-software-center
-    branch: master
+    branch: development
     tags: true
 
 notifications:
