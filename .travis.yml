@@ -2,13 +2,12 @@ language: cpp
 compiler: gcc
 dist: trusty
 sudo: required
-
 addons:
   apt:
     sources:
-    - sourceline: 'ppa:beineri/opt-qt-5.10.1-trusty'
-    - sourceline: 'deb http://repo.nxos.org/testing nxos main'
-      key_url: 'http://repo.nxos.org/public.key'
+    - sourceline: ppa:beineri/opt-qt-5.10.1-trusty
+    - sourceline: deb http://repo.nxos.org/testing nxos main
+      key_url: http://repo.nxos.org/public.key
     packages:
     - qt510base
     - qt510declarative
@@ -23,43 +22,40 @@ addons:
     - git
     - cmake
     - libappimage-dev
-
 before_install:
-  - wget http://ftp.debian.org/debian/pool/main/p/patchelf/patchelf_0.8-2_amd64.deb -O /tmp/patchelf_0.8-2_amd64.deb
-  - wget https://github.com/nomad-desktop/precompiled-kf5-linux/releases/download/continuous/kf5-5.44.0-Release-ubuntu-trusty-amd64.tar.xz -O /tmp/kf5-5.44.0-Release-ubuntu-trusty-amd64.tar.xz
-
+- wget http://ftp.debian.org/debian/pool/main/p/patchelf/patchelf_0.8-2_amd64.deb
+  -O /tmp/patchelf_0.8-2_amd64.deb
+- wget https://github.com/nomad-desktop/precompiled-kf5-linux/releases/download/continuous/kf5-5.44.0-Release-ubuntu-trusty-amd64.tar.xz
+  -O /tmp/kf5-5.44.0-Release-ubuntu-trusty-amd64.tar.xz
 install:
-  - sudo dpkg -i /tmp/patchelf_0.8-2_amd64.deb
-  - sudo tar xpf /tmp/kf5-5.44.0-Release-ubuntu-trusty-amd64.tar.xz -C /usr/
-  - sudo update-alternatives --install /usr/bin/qmake qmake /opt/qt510/bin/qmake 1
-  - sudo update-alternatives --install /usr/bin/qmlimportscanner qmlimportscanner /opt/qt510/bin/qmlimportscanner 1
-
-
+- sudo dpkg -i /tmp/patchelf_0.8-2_amd64.deb
+- sudo tar xpf /tmp/kf5-5.44.0-Release-ubuntu-trusty-amd64.tar.xz -C /usr/
+- sudo update-alternatives --install /usr/bin/qmake qmake /opt/qt510/bin/qmake 1
+- sudo update-alternatives --install /usr/bin/qmlimportscanner qmlimportscanner /opt/qt510/bin/qmlimportscanner
+  1
 script:
-  - sudo apt-get -y update
-  - sudo apt-get -yq install dpkg
-  - sudo apt-get -yq install nomad-plasma-look-and-feel luv-icon-theme nomad-desktop-settings
-  - /opt/qt510/bin/qt510-env.sh
-  - export QT_SELECT=qt5
-  - cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_PREFIX_PATH="/opt/qt510/"
-  - make -j$(nproc)
-  - export PATH=$PATH:/opt/qt510/bin/
-  - export QML_MODULES_FIND_DIRS="/opt/qt510/qml /usr/lib/x86_64-linux-gnu/qml"
-  - sudo ldconfig -c /opt/qt510/lib/ /usr/lib/x86_64-linux-gnu/
-  - build_scripts/appimage.create.sh
-
+- sudo apt-get -y update
+- sudo apt-get -yq install dpkg
+- sudo apt-get -yq install nomad-plasma-look-and-feel luv-icon-theme nomad-desktop-settings
+- "/opt/qt510/bin/qt510-env.sh"
+- export QT_SELECT=qt5
+- cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_PREFIX_PATH="/opt/qt510/"
+- make -j$(nproc)
+- export PATH=$PATH:/opt/qt510/bin/
+- export QML_MODULES_FIND_DIRS="/opt/qt510/qml /usr/lib/x86_64-linux-gnu/qml"
+- sudo ldconfig -c /opt/qt510/lib/ /usr/lib/x86_64-linux-gnu/
+- build_scripts/appimage.create.sh
 after_success:
-  - find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
-  - curl --upload-file "{$(echo dist/* | tr ' ' ',')}" https://transfer.sh/
-
+- find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f
+  2-3 | sort | uniq
+- curl --upload-file "{$(echo dist/* | tr ' ' ',')}" https://transfer.sh/
 branches:
   except:
-    - # Do not build tags that we create when we upload to GitHub Releases
-    - /^(?i:continuous)$/
-
+  - 
+  - "/^(?i:continuous)$/"
 before_deploy:
-  - if [ -z "$TRAVIS_TAG" ]; then export TRAVIS_TAG="continuous"; git tag -f $TRAVIS_TAG; fi
-
+- if [ -z "$TRAVIS_TAG" ]; then export TRAVIS_TAG="continuous"; git tag -f $TRAVIS_TAG;
+  fi
 deploy:
   provider: releases
   api_key: "$GITHUB_TOKEN"
@@ -72,7 +68,7 @@ deploy:
     repo: Nitrux/nx-software-center
     branch: development
     tags: true
-
 notifications:
   email: false
-  slack: nitrux:LgpKKPnWky7IWShmzXsyVDWu
+  slack:
+    secure: ayCtXh+YP9T4OBS9VaCqZW/jZcr2NBuDFpb2QwFg7G1gG00+iMviubMaWab8u1Gs2/XOsNv3GwkxDim6R9B4CLDUq6xIFZlQ0/14oShojPNWj1OeNKIwoYKSCJ2On2p0LDVbHJ47d9356GTTrcT03SbmxJxFMuwCUjcauF8ceCQAxUNcKXJezAMpYIJ1ySCNi8YUwyV9f5u3I+F9O8T4sIMpg5nABoMwG0MCZ0q4SpMmwH/y9ijqGBhrZE8k9uFP8B0MUlfc88i0JtVgGQb/TIfWt0gRNmqW5RhlwhTliCqp+zQNcE7T+twDCA2NicfsVtZ+ovoECBMujd37eO7mX4lVLrIzXS197ohKkD1YWvZtP6uwLq/2fMFR37/T0dtNjB32TcDMEeKyqakpZt0YUEVWp/6DNZUDuR6QqAFAGYd5IPi5pIOvySfcKbnT0oA89KmCGy7WUQPpf9fSL+89OoIHk5Fj2O7rRxxRpXGVX1cqufRXhv0fahBt/KhPEvkJjsXBtg7lHxxUCJs4IvOiobcvkU0bqC5mTGdYwRJn2mHjRBbjycgJVwAfbnzuaDd5adFlvJABgi6Ln54yfn9hXXt0r+Ndr56DCm4bmcWbFjLy+81S+uWWck1J8ZYwbYBX85kvq5tsyW+mfSGguSV3Dm80yZNhgqga3N5ct/TA2jc=
