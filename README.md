@@ -18,15 +18,15 @@ The AppImages included are fetched from:
 
 # Screenshots
  * Search View
- 
+
 ![](https://user-images.githubusercontent.com/1138094/39208689-58d3ae84-47c9-11e8-83a9-28d89a6f2cbb.png)
 
  * Application Details View
- 
+
 ![](https://user-images.githubusercontent.com/1138094/39208724-6d128f5a-47c9-11e8-90e3-d41472374406.png)
 
  * Tasks View
- 
+
 ![](https://user-images.githubusercontent.com/1138094/39208748-7978ded4-47c9-11e8-98c4-5dffeaf5ee0d.png)
 
 ## Build
@@ -43,7 +43,8 @@ The AppImages included are fetched from:
  * libboost-filesystem-dev (=>1.67)
  * libxml2-dev
  * libssl-dev
- * libboost-program-options-dev
+ * libboost-program-options (=>1.55)
+ * libboost-program-options-dev (=>1.55)
  * qt5declarative-dev
  * libqt5xmlpattern5-dev
  * autotools-dev
@@ -52,9 +53,10 @@ The AppImages included are fetched from:
  * libappimage-dev
  * libappimageinfo
  * libc6 (=>2.28)
+ * desktop-file-utils 
 
 ### Instructions
- 1. `git clone https://github.com/Nitrux/nx-software-center.git` 
+ 1. `git clone https://github.com/Nitrux/nx-software-center.git`
  1. `mkdir build`
  1. `cd build`
  1. `cmake .. -DCMAKE_BUILD_PREFIX=Release -DCMAKE_INSTALL_PREFIX=/usr`
