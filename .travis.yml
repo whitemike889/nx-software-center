@@ -25,6 +25,7 @@ addons:
     - binutils-multiarch-dev
     - libboost-filesystem1.55-dev
     - libboost-filesystem1.55.0
+    - libboost-program-options-dev
 before_install:
 - wget http://ftp.debian.org/debian/pool/main/p/patchelf/patchelf_0.8-2_amd64.deb
   -O /tmp/patchelf_0.8-2_amd64.deb
