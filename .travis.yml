@@ -1,6 +1,6 @@
 language: cpp
 compiler: gcc
-dist: trusty
+dist: bionic
 sudo: required
 addons:
   apt:
@@ -24,6 +24,7 @@ addons:
     - libappimage-dev
     - binutils-multiarch-dev
     - libboost-filesystem-dev
+    - libboost-filesystem
 before_install:
 - wget http://ftp.debian.org/debian/pool/main/p/patchelf/patchelf_0.8-2_amd64.deb
   -O /tmp/patchelf_0.8-2_amd64.deb
@@ -53,7 +54,7 @@ after_success:
 - curl --upload-file "{$(echo dist/* | tr ' ' ',')}" https://transfer.sh/
 branches:
   except:
-  - 
+  -
   - "/^(?i:continuous)$/"
 before_deploy:
 - if [ -z "$TRAVIS_TAG" ]; then export TRAVIS_TAG="continuous"; git tag -f $TRAVIS_TAG;
