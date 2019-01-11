@@ -37,8 +37,8 @@ The AppImages included are fetched from:
  * libtool
  * automake
  * qt5-default
- * binutils-multiarch-dev
- * libboost-filesystem-dev
+ * binutils-multiarch-dev (=>2.28)
+ * libboost-filesystem-dev (=>1.67)
  * libxml2-dev
  * libssl-dev
  * libboost-program-options-dev
@@ -47,6 +47,9 @@ The AppImages included are fetched from:
  * autotools-dev
  * libcairo2-dev
  * libfuse-dev
+ * libappimage-dev
+ * libappimageinfo
+ * libc6 (=>2.28)
 
 ### Instructions
  1. `git clone https://github.com/Nitrux/nx-software-center.git` 
