@@ -37,7 +37,9 @@ The AppImages included are fetched from:
  * libtool
  * automake
  * qt5-default
+ * binutils-multiarch (=>2.28)
  * binutils-multiarch-dev (=>2.28)
+ * libboost-filesystem (=>1.67)
  * libboost-filesystem-dev (=>1.67)
  * libxml2-dev
  * libssl-dev
