@@ -23,7 +23,7 @@ addons:
     - cmake
     - libappimage-dev
     - binutils-multiarch-dev
-    - libboost-filesystem-dev
+    - libboost-filesystem1.55-dev
     - libboost-filesystem1.55.0
 before_install:
 - wget http://ftp.debian.org/debian/pool/main/p/patchelf/patchelf_0.8-2_amd64.deb
