@@ -63,6 +63,8 @@ target_include_directories(core
     PUBLIC ${libappimage_INCLUDE_DIRECTORIES}
     )
 
+add_dependencies(core libappimage)
+
 ###
 # GUI
 ###

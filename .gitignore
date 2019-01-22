@@ -5,3 +5,6 @@
 /.project
 *.db
 *.qmlc
+
+# CLion
+.idea
