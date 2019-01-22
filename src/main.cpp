@@ -88,9 +88,8 @@ void initSoftwareCenterModules(QObject *parent) {
 
     CacheSource *cacheSource = new CacheSource(Cache::getApplicationsCachePath(), parent);
     AppImageHubSource *appImageHubSource = new AppImageHubSource(downloadManager, parent);
-    OCSStoreSource *ocsStoreSource = new OCSStoreSource(QUrl("https://www.appimagehub.com/ocs/v1/content/data"), parent);
 
-    updater = new Updater(repository, {cacheSource, appImageHubSource, ocsStoreSource});
+    updater = new Updater(repository, {cacheSource, appImageHubSource});
     updater->setExecutor(executor);
 
     cache = new Cache;
