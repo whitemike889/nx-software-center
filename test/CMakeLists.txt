@@ -26,30 +26,22 @@ add_executable(test_core
     src/TestOSCStoreParser.cpp
     src/TestExplorer.cpp)
 
-target_include_directories(test_core
-    PRIVATE ${CMAKE_SOURCE_DIR}/src/
-    private ${gtest_INCLUDE_DIRS}
-    PRIVATE ${Qt5Core_INCLUDE_DIRS}
-    PRIVATE ${Qt5Network_INCLUDE_DIRS}
-    PUBLIC ${Qt5XmlPatterns_INCLUDE_DIRS}
-    )
+target_include_directories(test_core PRIVATE ${CMAKE_SOURCE_DIR}/src/)
 
-target_compile_definitions(test_core
-    PRIVATE TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data/"
-    )
+target_compile_definitions(test_core PRIVATE TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data/")
 
-target_link_libraries(test_core
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Network
-    Qt5::Test
-    Qt5::XmlPatterns
+target_link_libraries(
+    test_core
 
-    libappimage
-
-    ${gtest_LIBRARIES}
-    pthread # this must be last else it fails at linking
-    )
+    PRIVATE Qt5::Core
+    PRIVATE Qt5::Gui
+    PRIVATE Qt5::Network
+    PRIVATE Qt5::Test
+    PRIVATE Qt5::XmlPatterns
+    PRIVATE libappimage
+    PRIVATE gtest
+    PRIVATE gtest_main
+)
 
 add_dependencies(test_core gtest)
 

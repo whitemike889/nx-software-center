@@ -39,7 +39,7 @@ namespace NX_SOFTWARE_CENTER_TESTS {
         ASSERT_EQ(1, parser.getResults().size());
 
         Application a = parser.getResults().first();
-        ASSERT_STREQ("Qtractor", a.getCodeName().toStdString().c_str());
+        ASSERT_STREQ("qtractor", a.getCodeName().toStdString().c_str());
         ASSERT_STREQ("0.8.6", a.getVersion().toStdString().c_str());
 
         const auto expectedDescription = "Qtractor is an audio/MIDI multi-track sequencer application written in C++ "
